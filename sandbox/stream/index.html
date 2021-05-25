@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AR stream sandbox</title>
+
+    <!-- Import the main script file -->
+    <script defer src="main.js"></script>
+
+    <!-- Import stylesheet -->
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+
+</head>
+<body>
+    <div class="stream">
+        <device type="media" onchange="update(this.data)"></device>
+        <video id="video" autoplay muted></video>
+    </div>
+
+    <div class="effects">
+        <button class="cssFilter" data-id="normal">Normal</button>
+        <button class="cssFilter" data-id="grayscale">Niveau de gris</button>
+        <button class="cssFilter" data-id="sepia">Sépia</button>
+        <button class="cssFilter" data-id="saturate">Saturation</button>
+        <button class="cssFilter" data-id="invert">Invertion</button>
+    </div>
+</body>
+</html>
