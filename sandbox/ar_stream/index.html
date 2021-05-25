@@ -5,16 +5,23 @@
     <title>AR Stream</title>
 
     <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
+    <script src="https://google-ar.github.io/three.ar.js/dist/three.ar.js"></script>
+    <script src="https://rawgit.com/chenzlabs/aframe-ar/827e9db/dist/aframe-ar.min.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/cfe5f316/dist/aframe-extras.js"></script>
+
+    <script defer src="main.js"></script>
 </head>
 <body>
     <a-scene ar>
         <a-assets>
-            <a-asset id="unicorn-asset" src="Unicorn.glb"></a-asset>
+            <a-asset id="cesium-man" src="CesiumMan.glb"></a-asset>
         </a-assets>
-        <a-entity id="unicorn" gltf-model="#unicorn-asset" position="0 0 -5" scale="0.5 0.5 0.5"
-                  animation-mixer>
+        <a-entity id="walker" gltf-model="#cesium-man" position="0 0 -5" scale="0.5 0.5 0.5" animation-mixer>
         </a-entity>
+        <a-camera ar-raycaster raycaster cursor="fuse:false"> </a-camera>
+        <a-ring id="cursor" radius-inner="0.1" radius-outer="0.2"
+                color="teal" position="0 -0.8 -5" rotation="-90 0 0">
+        </a-ring>
     </a-scene>
 </body>
 </html>
