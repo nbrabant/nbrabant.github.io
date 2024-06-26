@@ -1,7 +1,7 @@
-====Petit aide mémoire pour l'utilisation de Prestashop 1.6====
+====Petit aide mémoire pour l'utilisation de Prestashop 1.7====
 
 
-Liste de modules dans un hook :
+# Liste de modules dans un hook
 <code sql>
 SELECT *
 FROM `ps_module`
@@ -21,3 +21,8 @@ Principaux hook :
 
 
 Ne pas oublier de modifier le nom de domaine dans la partie shop_url (table de gestion du multiboutique) lors d'un passage en local
+
+# Installation de module
+```bash
+bin/console prestashop:module install {MODULENAME}
+```
