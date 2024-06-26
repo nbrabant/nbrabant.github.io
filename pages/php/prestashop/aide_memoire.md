@@ -10,7 +10,7 @@ WHERE id_module IN (
 );
 ```
 
-Principaux hook :
+## Principal displaying hooks
 
 * front Right Column    > 7
 * front Left Column     > 8
@@ -20,7 +20,7 @@ Principaux hook :
 * front footer          > 22
 
 
-Ne pas oublier de modifier le nom de domaine dans la partie shop_url (table de gestion du multiboutique) lors d'un passage en local
+Don't forget to modify the host into `shop_url` (multishop table) for local envs
 
 ## Installation de module
 ```bash
