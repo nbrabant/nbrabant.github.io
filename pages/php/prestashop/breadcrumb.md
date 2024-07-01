@@ -1,4 +1,4 @@
-====Breadcrumb Prestashop 1.6====
+# Breadcrumb Prestashop 1.6
 
 Ou comment ajouter du référencement en Rich Snippets sous Prestashop 1.6 en ne modifiant que le template et en ajoutant une classe overidée
 
@@ -7,7 +7,7 @@ Ajout des Rich Snippets breadcrumb sur Prestashop : modification du tpl
 
 Dans un premier temps, vous devons modifiez le template du breadbrumb. Ouvrez le template dubredcrumb de votre thème
 
-<code html>
+```html
 <!-- Breadcrumb -->
 {if isset($smarty.capture.path)}{assign var='path' value=$smarty.capture.path}{/if}
 <div class="breadcrumb">
@@ -22,11 +22,11 @@ Dans un premier temps, vous devons modifiez le template du breadbrumb. Ouvrez le
     {/if}
 </div>
 <!-- /Breadcrumb -->
-</code>
+```
 
 Et modifiez le de cette manière :
 
-<code html>
+```html
 <!-- Breadcrumb -->
 {if isset($smarty.capture.path)}{assign var='path' value=$smarty.capture.path}{/if}
 <div class="breadcrumb clearfix" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -41,7 +41,7 @@ Et modifiez le de cette manière :
     {/if}
 </div>
 <!-- /Breadcrumb -->
-</code>
+```
 
 A partir de ce template, vous devez overrider la génération de breadcrumb de Prestashop avec la méthode Tools::getPath()
 
@@ -50,33 +50,33 @@ Ajout des Rich Snippets breadcrumb sur Prestashop : override du Tools::getPath()
 
 Dans un premier temps, créez la classe Tools, héritant de ToolsCore dans le dossier override/classe et copier la méthode getTools dans la nouvelle classe créée. Ensuite, juste après la vérification de la variable $context, initialisez la valeur de la variable $path comme suit :
 
-<code php>
+```php
 $path = '<span itemprop="title">'.$path.'</span>';
-</code>
+```
 
 Dans l'itération de lecture des différentes catégories, ajoutez les attributs itemprop sur les balises de lien :
 
-<code php>
+```php
 $full_path .=
 	(($n < $n_categories || $link_on_the_item) ? '<a href="'.Tools::safeOutput($context->link->getCategoryLink((int)$category['id_category'], $category['link_rewrite'])).'" itemprop="url" title="'.htmlentities($category['name'], ENT_NOQUOTES, 'UTF-8').'">' : '').
 	htmlentities($category['name'], ENT_NOQUOTES, 'UTF-8').
 	(($n < $n_categories || $link_on_the_item) ? '</a>' : '').
 	(($n++ != $n_categories || !empty($path)) ? '<span class="navigation-pipe">'.$pipe.'</span>' : '');
-</code>
+```
 
 Même chose pour la partie CMS :
 
-<code php>
+```php
 if ($path != $category->name)
     $full_path .= '<a href="'.Tools::safeOutput($category_link).'" itemprop="url">'.htmlentities($category->name, ENT_NOQUOTES, 'UTF-8').'</a><span class="navigation-pipe">'.$pipe.'</span>'.$path;
 else
     $full_path = ($link_on_the_item ? '<a href="'.Tools::safeOutput($category_link).'" itemprop="url">' : '').htmlentities($path, ENT_NOQUOTES, 'UTF-8').($link_on_the_item ? '</a>' : '');
-</code>
+```
 
 
 Au final, la réécriture de la méthode devrait être semblable à celà :
 
-<code php>
+```php
 class Tools extends ToolsCore
 {
     public static function getPath($id_category, $path = '', $link_on_the_item = false, $category_type = 'products', Context $context = null) {
@@ -140,4 +140,4 @@ class Tools extends ToolsCore
         }
     }
 }
-</code>
+```
