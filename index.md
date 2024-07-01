@@ -1,7 +1,7 @@
 ## Documentation
-- [Docker](pages/docker)
-- [Git](pages/git)
 - [Linux](pages/linux)
+- [Git](pages/git)
+- [Docker](pages/docker)
 - [PHP](pages/php)
 - [Vagrant](pages/vagrant)
 
