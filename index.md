@@ -1,7 +1,11 @@
 ## Documentation
-- [pages](pages)
+- [Docker](pages/docker)
+- [Git](pages/git)
+- [Linux](pages/linux)
+- [PHP](pages/php)
+- [Vagrant](pages/vagrant)
 
 ## Sandbox
-- [video streaming](sandbox/stream)
+- [Video streaming](sandbox/stream)
 - [A-R sample](sandbox/ar_stream)
 - [PWA](sandbox/pwa)
