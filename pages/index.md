@@ -22,10 +22,10 @@
 
 ## php
 - laravel
-    -  [performant](php/performant.md)
+    -  [performant](php/laravel/performant.md)
 - prestashop
-    - [aide memoire](php/aide_memoire.md)
-    - [breadcrumb](php/breadcrumb.md)
+    - [aide memoire](php/prestashop/aide_memoire.md)
+    - [breadcrumb](php/prestashop/breadcrumb.md)
 - [array map et array walk](php/array_map_et_array_walk.md)
 
 ## vagrant
