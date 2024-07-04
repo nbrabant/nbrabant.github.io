@@ -1,13 +1,14 @@
 # Prestashop 1.7 Cheat Sheet
 
 
-## Liste de modules dans un hook
+## Hook usages
 ```sql
-SELECT *
-FROM `ps_module`
-WHERE id_module IN (
-	SELECT id_module FROM `ps_hook_module` WHERE id_hook = 8
-);
+SELECT ps_hook.name AS hook_name, ps_module.name AS module_name, ps_hook_module.position
+FROM ps_module
+LEFT JOIN ps_hook_module ON ps_module.id_module = ps_hook_module.id_module
+LEFT JOIN ps_hook ON ps_hook.id_hook = ps_hook_module.id_hook
+WHERE ps_hook.name IN ({{HOOK_NAMES}})
+ORDER BY ps_hook.id_hook, ps_hook_module.position;
 ```
 
 ## Principal displaying hooks
