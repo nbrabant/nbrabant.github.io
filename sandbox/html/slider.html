@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.range-slider {
+  width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.slider-container {
+  position: relative;
+  height: 20px;
+  background: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.slider-track {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    #4CAF50 0%,
+    #4CAF50 calc(var(--start) * 1%),
+    #2196F3 calc(var(--start) * 1%),
+    #2196F3 calc((var(--end) + var(--start)) / 2 * 1%),
+    #4CAF50 calc((var(--end) + var(--start)) / 2 * 1%),
+    #4CAF50 100%
+  );
+}
+
+input[type="range"] {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+  pointer-events: none;
+}
+
+input[type="range"]:nth-child(1) {
+  left: 0;
+  z-index: 3;
+}
+
+input[type="range"]:nth-child(2) {
+  right: 0;
+  transform: rotate(180deg);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border: 2px solid #2196F3;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border: 2px solid #2196F3;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: transparent;
+}
+
+input[type="range"]::-moz-range-track {
+  background: transparent;
+}
+
+:root {
+  --start: 25;
+  --end: 75;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const startSlider = document.getElementById('start-slider');
+  const endSlider = document.getElementById('end-slider');
+  const sliderContainer = document.querySelector('.slider-container');
+
+  // Update values when either slider moves
+  function updateSliderValues() {
+    const startValue = parseInt(startSlider.value);
+    const endValue = parseInt(endSlider.value);
+    
+    // Ensure start value is always less than end value
+    if (startValue >= endValue) {
+      startSlider.value = endValue - 1;
+    }
+    
+    // Update CSS custom properties
+    sliderContainer.style.setProperty('--start', startValue);
+    sliderContainer.style.setProperty('--end', endValue);
+
+    fillTooltip();
+  }
+
+  function fillTooltip() {
+    fromInput.textContent = `${fromSlider.value}`;
+    toInput.textContent = `${toSlider.value}`;
+  }
+
+  // Add event listeners to both sliders
+  startSlider.addEventListener('input', updateSliderValues);
+  endSlider.addEventListener('input', updateSliderValues);
+
+  // Initialize values
+  updateSliderValues();
+});
+</script>
+</head>
+<body>
+<div class="range-slider">
+  <div class="slider-container">
+    <div class="form_control">
+        <div class="slider-tooltip-lower"></div>
+        <div class="slider-tooltip-upper"></div>
+    </div>
+
+    <div class="slider-track"></div>
+    <div class="slider-control">
+      <input type="range" min="0" max="100" value="25" id="start-slider">
+      <input type="range" min="0" max="100" value="75" id="end-slider">
+    </div>
+  </div>
+</div>
+</body>
+</html>
